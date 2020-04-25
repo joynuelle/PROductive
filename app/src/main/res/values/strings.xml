@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Productive</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="productive">PROductive</string>
+    <string name="go_to_calendar">Go to Calendar</string>
+    <string name="scan_syllabus">Scan Syllabus</string>
+    <string name="go_to_grade_calculator">Go to Grade Calculator</string>
+    <string name="final_grade_calculator">Final Grade Calculator</string>
+    <string name="this_tool_will_help_you_figure_out_what_grade_percentage_you_need_to_get_on_your_exam">This tool will help you figure out what grade/percentage you need to get on your exam!</string>
+    <string name="your_current_grade_is">Your current grade is...</string>
+    <string name="you_want_at_least_a">You want at least a...</string>
+    <string name="your_final_is_worth">Your final is worth...</string>
+    <string name="calculate_what_i_need">Calculate What I Need!</string>
+    <string name="you_need">You need ...</string>
+    <string name="_97">97</string>
+    <string name="percent">%</string>
+    <string name="_94">94</string>
+    <string name="_10">10</string>
+</resources>
