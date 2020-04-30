@@ -16,4 +16,9 @@
     <string name="percent">%</string>
     <string name="_94">94</string>
     <string name="_10">10</string>
+    <string name="checkedtextview">CheckedTextView</string>
+    <string name="to_do_today">To Do Today</string>
+    <string name="sunday_april_26_2020">Sunday April 26, 2020</string>
+    <string name="type_in_an_event_you_want_to_add">Type in an event you want to add</string>
+    <string name="add_event">Add Event</string>
 </resources>

@@ -52,7 +52,8 @@
         android:textColorHighlight="#00A84242"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/textView"
+        android:onClick="goToCalendar"/>
 
     <Button
         android:id="@+id/scanSyllabus"
@@ -84,4 +85,34 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/scanSyllabus"
         android:onClick="goToCalculator"/>
+
+    <CheckedTextView
+        android:id="@+id/checkedTextView"
+        android:layout_width="337dp"
+        android:layout_height="184dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginLeft="37dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginRight="37dp"
+        android:text="@string/checkedtextview"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toDo" />
+
+    <TextView
+        android:id="@+id/toDo"
+        android:layout_width="124dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="144dp"
+        android:layout_marginLeft="144dp"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="144dp"
+        android:layout_marginRight="144dp"
+        android:text="@string/to_do_today"
+        android:textSize="18sp"
+        app:fontFamily="@font/comfortaa"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/gradeCalculator" />
 </androidx.constraintlayout.widget.ConstraintLayout>
