@@ -28,32 +28,34 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginLeft="115dp"
-        android:layout_marginTop="58dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="115dp"
         android:layout_marginRight="115dp"
         android:text="@string/productive"
         android:textSize="30sp"
-        app:fontFamily="@font/comfortaa"
+        app:fontFamily="@font/comfortaa_bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/Calendar"
+        android:id="@+id/calendarButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="147dp"
         android:layout_marginLeft="147dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="147dp"
         android:layout_marginRight="147dp"
+        android:layout_marginBottom="10dp"
         android:background="#EE9797"
+        android:onClick="goToCalendar"
         android:text="@string/go_to_calendar"
         android:textColorHighlight="#00A84242"
+        app:layout_constraintBottom_toTopOf="@+id/scanSyllabus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        android:onClick="goToCalendar"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <Button
         android:id="@+id/scanSyllabus"
@@ -61,14 +63,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="151dp"
         android:layout_marginLeft="151dp"
-        android:layout_marginTop="22dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="151dp"
         android:layout_marginRight="151dp"
         android:background="#EBE4A9"
         android:text="@string/scan_syllabus"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Calendar" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarButton" />
 
     <Button
         android:id="@+id/gradeCalculator"
@@ -76,29 +78,15 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="115dp"
         android:layout_marginLeft="115dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="115dp"
         android:layout_marginRight="115dp"
         android:background="#87C7DA"
+        android:onClick="goToCalculator"
         android:text="@string/go_to_grade_calculator"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scanSyllabus"
-        android:onClick="goToCalculator"/>
-
-    <CheckedTextView
-        android:id="@+id/checkedTextView"
-        android:layout_width="337dp"
-        android:layout_height="184dp"
-        android:layout_marginStart="37dp"
-        android:layout_marginLeft="37dp"
-        android:layout_marginTop="17dp"
-        android:layout_marginEnd="37dp"
-        android:layout_marginRight="37dp"
-        android:text="@string/checkedtextview"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toDo" />
+        app:layout_constraintTop_toBottomOf="@+id/scanSyllabus" />
 
     <TextView
         android:id="@+id/toDo"
@@ -106,13 +94,39 @@
         android:layout_height="28dp"
         android:layout_marginStart="144dp"
         android:layout_marginLeft="144dp"
-        android:layout_marginTop="13dp"
         android:layout_marginEnd="144dp"
         android:layout_marginRight="144dp"
+        android:layout_marginBottom="5dp"
         android:text="@string/to_do_today"
         android:textSize="18sp"
         app:fontFamily="@font/comfortaa"
+        app:layout_constraintBottom_toTopOf="@+id/showDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gradeCalculator" />
+
+    <ListView
+        android:id="@+id/homeListView"
+        android:layout_width="413dp"
+        android:layout_height="249dp"
+        android:layout_marginBottom="54dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/showDate" />
+
+    <TextView
+        android:id="@+id/showDate"
+        android:layout_width="172dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="117dp"
+        android:layout_marginLeft="117dp"
+        android:layout_marginEnd="118dp"
+        android:layout_marginRight="118dp"
+        android:gravity="center"
+        app:fontFamily="@font/comfortaa"
+        app:layout_constraintBottom_toTopOf="@+id/homeListView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toDo" />
 </androidx.constraintlayout.widget.ConstraintLayout>

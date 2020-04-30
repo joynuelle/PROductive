@@ -3,6 +3,7 @@ package com.example.productive;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class DBHelper {
@@ -53,9 +54,31 @@ public class DBHelper {
                 date, title, content));
     }
 
-    public void updateNote(String title, String date, String content) {
+    public ArrayList<Event> deleteEntry( String date, String toFindDescription) {
         createTable();
-        sqLiteDatabase.execSQL(String.format("UPDATE events set content = '%s', date = '%s' where title '%s'",
-                content, date, title));
+        Cursor c = sqLiteDatabase.rawQuery(String.format("Select * from events where date like '%s'", date), null);
+
+        sqLiteDatabase.delete("events", "date=? and content=?", new String[]{date, toFindDescription});
+
+        int dateIndex = c.getColumnIndex("date");
+        int eventIndex = c.getColumnIndex("title");
+        int descriptionIndex = c.getColumnIndex("content");
+
+        c.moveToFirst();
+
+        ArrayList<Event> eventList = new ArrayList<>();
+        while (!c.isAfterLast()) {
+            String eventTitle = c.getString(eventIndex);
+            String date1 = c.getString(dateIndex);
+            String description = c.getString(descriptionIndex);
+
+            Event event = new Event(date1, eventTitle, description);
+            eventList.add(event);
+            c.moveToNext();
+        }
+        c.close();
+        //sqLiteDatabase.close();
+
+        return eventList;
     }
 }

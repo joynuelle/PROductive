@@ -31,14 +31,14 @@ public class Calendar extends AppCompatActivity {
 
     public static ArrayList<Event> events = new ArrayList<>();
 
-    //int eventid = -1;
     CalendarView calendarView;
     String curDate;
     SQLiteDatabase sqLiteDatabase;
-    DateFormat dateFormat;
     EditText typeinEvent;
     DBHelper dbHelper;
     ArrayAdapter adapter;
+    DateFormat dateFormat;
+    Date date1;
 
     public static ArrayList<Event> eventsList = new ArrayList<>();
 
@@ -47,9 +47,8 @@ public class Calendar extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calendar2);
 
-
-        // SharedPreferences sharedPreferences = getSharedPreferences("com.example.productive", Context.MODE_PRIVATE);
         Context context = getApplicationContext();
+        //context.deleteDatabase("events");
         sqLiteDatabase = context.openOrCreateDatabase("events",Context.MODE_PRIVATE, null);
         dbHelper = new DBHelper(sqLiteDatabase);
 
@@ -58,14 +57,14 @@ public class Calendar extends AppCompatActivity {
         ListView listView = findViewById(R.id.listview);
 
 
-            DateFormat dateFormat = new SimpleDateFormat("MM/dd/yyyy");
-            Date date1 = new Date();
-
+        dateFormat = new SimpleDateFormat("M/d/yyyy");
+        date1 = new Date();
+        curDate = dateFormat.format(date1);
         TextView date = findViewById(R.id.date);
         date.setText(dateFormat.format(date1));
 
         eventsList = dbHelper.readNotes(curDate);
-        ArrayList<String> displayEvents = new ArrayList<>();
+        final ArrayList<String> displayEvents = new ArrayList<>();
         for (Event curEvent : eventsList) {
             displayEvents.add(String.format("Title: %s\nDate: %s\nContent:%s", curEvent.getTitle(), curEvent.getDate(), curEvent.getContent()));
         }
@@ -75,16 +74,25 @@ public class Calendar extends AppCompatActivity {
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder adb=new AlertDialog.Builder(Calendar.this);
                 adb.setTitle("Delete?");
-                adb.setMessage("Are you sure you want to delete this event?");
+                Event curevent = eventsList.get(position);
+                adb.setMessage("Are you sure you want to delete '" + curevent.getTitle() + "' ?");
                 final int positionToRemove = position;
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        eventsList.remove(positionToRemove);
+                        Event curevent = eventsList.get(position);
+                        if (curevent.getDate() == "null") {
+                            eventsList = dbHelper.deleteEntry(dateFormat.format(date1), curevent.getContent());
+                        } else {
+                            eventsList = dbHelper.deleteEntry(curevent.getDate(), curevent.getContent());
+                        }
                         adapter.notifyDataSetChanged();
+                        Intent intent = getIntent();
+                        finish();
+                        startActivity(intent);
                     }});
                 adb.show();
             }
@@ -109,7 +117,6 @@ public class Calendar extends AppCompatActivity {
 
                 ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, displayEvents);
                 listView.setAdapter(adapter);
-
             }
         });
     }
@@ -130,8 +137,8 @@ public class Calendar extends AppCompatActivity {
         SQLiteDatabase sqLiteDatabase = context.openOrCreateDatabase("events",Context.MODE_PRIVATE, null);
         DBHelper dbHelper = new DBHelper(sqLiteDatabase);
         dbHelper.saveEvent(title, content, curDate);
-//        Intent intent = getIntent();
-//        finish();
-//        startActivity(intent);
+        Intent intent = getIntent();
+        finish();
+        startActivity(intent);
     }
 }
