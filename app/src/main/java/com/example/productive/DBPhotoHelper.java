@@ -71,10 +71,11 @@ public class DBPhotoHelper extends SQLiteOpenHelper {
 
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(selectQuery, null);
+        int descriptionIndex = cursor.getColumnIndex("image_name");
         if (cursor.moveToFirst()) {
             do {
                 byte[] image = cursor.getBlob(1);
-                String imagename = cursor.getString(0);
+                String imagename = cursor.getString(descriptionIndex);
                 Image image1 = new Image(imagename, image);
                 photos.add(image1);
             }

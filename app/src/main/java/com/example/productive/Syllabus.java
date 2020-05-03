@@ -43,24 +43,28 @@ public class Syllabus extends AppCompatActivity {
 
         ArrayList<String> displayImages = new ArrayList<>();
         for (Image curImg : photos) {
-            displayImages.add(String.format("Title: %s\n", curImg.getName()));
+            displayImages.add(String.format("Title: %s\n", curImg.getName().toString()));
         }
         ListView listView = findViewById(R.id.imagelist);
 
         final ArrayAdapter adapter = new ArrayAdapter(getApplicationContext(),android.R.layout.simple_list_item_1, photos);
         listView.setAdapter(adapter);
 
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
                 AlertDialog.Builder adb=new AlertDialog.Builder(Syllabus.this);
                 adb.setTitle("Delete?");
+                final Image curimg = photos.get(position);
+                DbBitmapUtility dbBitmapUtility = new DbBitmapUtility();
+                imageView.setImageBitmap(dbBitmapUtility.getImage(curimg.getImage()));
                 adb.setMessage("Are you sure you want to delete this image?");
                 final int positionToRemove = position;
                 adb.setNegativeButton("Cancel", null);
                 adb.setPositiveButton("Ok", new AlertDialog.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Image curimg = photos.get(position);
                         dbPhotoHelper.deleteEntry(curimg.getName());
                         adapter.notifyDataSetChanged();
                         Intent intent = getIntent();
@@ -101,8 +105,6 @@ public class Syllabus extends AppCompatActivity {
                 String name = imagename.getText().toString();
                 Image image = new Image(name, imgbyte);
                 dbPhotoHelper.addEntry(image);
-
-                imageView.setImageBitmap(bitmap);
                 Intent intent = getIntent();
                 finish();
                 startActivity(intent);
